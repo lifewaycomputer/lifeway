@@ -2799,6 +2799,75 @@ body {
 
 .goog-te-banner-frame.skiptranslate { display: none !important; }
 body { top: 0px !important; }
+        /* --- UNIVERSAL RESPONSIVE FIX --- */
+
+/* 1. Container को लचीला बनाएं */
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* 2. Header (Logo & Buttons) Fix */
+.logo-area {
+    flex-wrap: wrap; /* मोबाइल पर बटन नीचे आ जाएंगे */
+    justify-content: center;
+    gap: 15px;
+    padding: 15px 2%;
+}
+
+.logo-area a[style*="margin-left: 800px"] {
+    margin-left: 0 !important; /* पुराने 800px मार्जिन को खत्म करें */
+}
+
+/* 3. Navigation Menu Fix */
+.navbar {
+    justify-content: center;
+    overflow-x: auto; /* छोटे डिवाइस पर स्क्रॉल होगा */
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 4. Dashboard Grid Fix (Cards 1 column in mobile) */
+.stats-grid, .sa-stat-grid, .cen-stat-grid, .course-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 15px;
+}
+
+/* 5. About Page & Layout Splits */
+.abt-layout, .ac-layout, .pay-layout, .att-layout {
+    display: flex;
+    flex-direction: column; /* डिफ़ॉल्ट मोबाइल के लिए */
+    height: auto !important;
+}
+
+@media (min-width: 992px) {
+    .abt-layout, .ac-layout, .pay-layout, .att-layout {
+        flex-direction: row; /* लैपटॉप पर साइड-बाय-साइड */
+    }
+    .abt-sidebar, .sa-sidebar, .cen-sidebar {
+        width: 260px !important;
+        flex-shrink: 0;
+    }
+}
+
+/* 6. Images & Tables */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.cen-table-container {
+    overflow-x: auto; /* टेबल मोबाइल पर बाहर नहीं निकलेगी */
+}
+
+/* 7. Super Admin & Center Dashboards */
+#page-super-dashboard, #page-cen-dashboard {
+    position: relative !important; /* Fixed हटाकर स्क्रॉल आसान करें */
+    height: auto !important;
+    min-height: 100vh;
+}
 </style>
     <meta name="description" content="Lifeway Computers - India's No.1 ISO 9001:2015 Certified Computer Institute. Providing ADCA, DCA, Tally, and Web Development courses with online certificate verification.">
 <meta name="keywords" content="Lifeway Computers, best computer institute in Delhi, computer franchise India, ADCA course near me, DCA certificate online, Tally Prime training, ISO certified computer center franchise, computer literacy mission, student certificate verification, Lifeway computer education">
@@ -2855,18 +2924,23 @@ body { top: 0px !important; }
             
             <span>Helpline: +91-9990788083</span>
         </div>
-        <div class="logo-area">
-            <a href="https://ibb.co/TxXD7Tvh"><img src="https://i.ibb.co/bMhjC3Wd/Logo-Lifeway.png" alt="Logo-Lifeway" height="80px" ;   width="220px"></a><br /><a target='_blank' href='https://usefulwebtool.com/'></a><br />
-            <a href="https://www.indiapost.gov.in/home" target="_blank" 
-   style="display: flex; align-items: right; gap: 8px; background:white; color: #d0021b; border: 1px solid #d0021b; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: 600; transition: 0.3s; margin-left: 800px;">
+        <div class="logo-area" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+    <a href="index.html">
+        <img src="https://i.ibb.co/bMhjC3Wd/Logo-Lifeway.png" alt="Logo-Lifeway" style="height: 60px; width: auto;">
+    </a>
     
-    <img src="https://www.indiapost.gov.in/_layouts/15/images/DOP.Portal.Tracking/indiapost-logo.png" 
-         alt="India Post" 
-         style="height: 20px; width: auto;"
-         onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/9/9d/India_Post_Logo.svg/512px-India_Post_Logo.svg.png'">
-    
-    <span>Track Status Indian Post</span>
-</a>
+    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;">
+        <a href="https://www.indiapost.gov.in/home" target="_blank" class="btn-track-post" style="display: flex; align-items: center; gap: 8px; background:white; color: #d0021b; border: 1px solid #d0021b; padding: 8px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: 600;">
+            <img src="https://www.indiapost.gov.in/_layouts/15/images/DOP.Portal.Tracking/indiapost-logo.png" style="height: 18px;">
+            <span>Track Status</span>
+        </a>
+
+        <div class="lang-box-custom">
+            <a href="javascript:void(0)" onclick="doGTranslate('en|en')" class="gflag"><img src="https://flagcdn.com/w20/us.png" alt="EN"> EN</a>
+            <a href="javascript:void(0)" onclick="doGTranslate('en|hi')" class="gflag"><img src="https://flagcdn.com/w20/in.png" alt="HI"> HI</a>
+        </div>
+    </div>
+</div>
 <div class="lang-box-custom">
     <a href="javascript:void(0)" onclick="doGTranslate('en|en')" title="English" class="gflag">
         <img src="https://flagcdn.com/w20/us.png" alt="English"> English
