@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lifeway Computers </title>
+    <title>Lifeway Computers | </title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
 
 
     <style>
@@ -2892,27 +2889,31 @@ img {
         }, 'google_translate_element');
     }
 
-    // ये फंक्शन बटन दबाते ही भाषा बदलेगा
     function doGTranslate(lang_pair) {
-        var lang = lang_pair.split('|')[1];
-        var teCombo = document.querySelector('.goog-te-combo');
+    if (lang_pair == '') return;
+    var lang = lang_pair.split('|')[1];
+    var teCombo = document.querySelector('.goog-te-combo');
 
-        if (teCombo == null || teCombo.innerHTML.length == 0) {
-            // अगर अभी लोड नहीं हुआ, तो इंतज़ार करो
-            setTimeout(function() { doGTranslate(lang_pair); }, 500);
+    if (teCombo == null || teCombo.innerHTML.length == 0) {
+        // अगर 10 बार कोशिश के बाद भी लोड न हो, तो रुक जाओ (Infinite loop fix)
+        if (!window.retryCount) window.retryCount = 0;
+        if (window.retryCount < 10) {
+            window.retryCount++;
+            setTimeout(function() { doGTranslate(lang_pair); }, 1000);
+        }
+    } else {
+        window.retryCount = 0; // Reset count on success
+        teCombo.value = lang;
+        if (typeof (Event) === 'function') {
+            var event = new Event('change', { 'bubbles': true });
+            teCombo.dispatchEvent(event);
         } else {
-            teCombo.value = lang;
-            // मैन्युअली 'change' इवेंट फायर करना पड़ता है
-            if (typeof (Event) === 'function') {
-                var event = new Event('change', { 'bubbles': true });
-                teCombo.dispatchEvent(event);
-            } else {
-                var event = document.createEvent('HTMLEvents');
-                event.initEvent('change', true, true);
-                teCombo.dispatchEvent(event);
-            }
+            var event = document.createEvent('HTMLEvents');
+            event.initEvent('change', true, true);
+            teCombo.dispatchEvent(event);
         }
     }
+}
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
